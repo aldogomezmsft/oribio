@@ -1,0 +1,242 @@
+/* LAYOUTS */
+
+/* SLIDE CONTAINER */
+.slide-container {
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* LAYOUT: SPLIT */
+.layout-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+}
+
+.split-content {
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.split-media {
+    width: 100%;
+    height: 100%;
+}
+
+/* LAYOUT: MANIFESTO */
+.layout-manifesto {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* LAYOUT: COMPARISON */
+.layout-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+    padding: var(--spacing-2xl);
+}
+
+.comparison-header {
+    grid-column: 1 / -1;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.col-oribio {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.col-others {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* LAYOUT: 3 COLUMN */
+.layout-3col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* LAYOUT: DARK */
+.layout-dark {
+    background-color: var(--color-black-soft);
+    color: var(--color-ivory);
+}
+
+/* LAYOUT: DARK SPLIT */
+.layout-dark.layout-split {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1024px) {
+    .layout-split,
+    .layout-dark.layout-split {
+        grid-template-columns: 1fr;
+    }
+
+    .split-content {
+        padding: var(--spacing-lg);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .layout-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .col-oribio {
+        grid-column: 1;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .col-others {
+        grid-column: 1;
+    }
+
+    .grid-3col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* LAYOUT: QUADRANT (used on comparison slide) */
+.layout-quadrant {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+    padding: var(--spacing-lg);
+}
+
+.layout-quadrant .quad {
+    padding: var(--spacing-md);
+}
+
+.layout-quadrant .market {
+    background: var(--color-sand);
+    border-radius: var(--radius-md);
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.layout-quadrant .header {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layout-quadrant .method-cards {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    overflow-y: auto;
+    max-height: calc(100vh - 220px);
+}
+
+.layout-quadrant .others {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+@media (max-width: 800px) {
+    .layout-quadrant {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+    .layout-quadrant .header, .layout-quadrant .market, .layout-quadrant .method-cards, .layout-quadrant .others {
+        grid-column: 1 / -1;
+    }
+}
+
+/* SPLIT-COMPARE: two-column split for comparison slide (Otros vs Método) */
+.layout-split-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+    padding: var(--spacing-2xl);
+    height: 100%;
+}
+
+.layout-split-compare .others {
+    background: var(--color-marble);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    color: #666;
+    box-shadow: var(--shadow-sm);
+}
+
+.layout-split-compare .method {
+    background: linear-gradient(180deg, var(--color-ivory) 0%, var(--color-sand) 100%);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.layout-split-compare .method .recipe-card {
+    background: white;
+}
+
+/* Title row for split compare: left and right titles aligned */
+.layout-split-compare .split-titles {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.layout-split-compare .split-titles .left-title {
+    text-align: left;
+}
+
+.layout-split-compare .split-titles .right-title {
+    text-align: right;
+}
+
+.layout-split-compare .method .panel-title {
+    font-size: 1.8rem;
+    color: var(--color-olive);
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+}
+
+/* Ensure columns scroll separately if content overflows */
+.layout-split-compare .others,
+.layout-split-compare .method {
+    overflow-y: auto;
+    max-height: calc(100vh - 160px);
+}
+
+@media (max-width: 900px) {
+    .layout-split-compare {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-lg);
+    }
+}
