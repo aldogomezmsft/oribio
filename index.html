@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="El Método Oribio - Un ritual simple de cuidado capilar con productos funcionales">
+    <meta name="theme-color" content="#3D2817">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Oribio">
+    <meta name="apple-mobile-web-app-icon-192x192" href="icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <title>El Método Oribio</title>
+    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;600;700&display=swap" crossorigin>
+    <style>
+        /* ========== THEME VARIABLES ========== */
+        :root {
+            /* Colors - Café Palette */
+            --color-marble: #F5F3F0;
+            --color-ivory: #FFFFFF;
+            --color-sand: #E8DCC8;
+            --color-taupe: #6B5344;
+            --color-taupe-border: #D4CAC0;
+            --color-olive: #3D2817;
+            --color-gold: #C9A961;
+            --color-black-soft: #3D2817;
+            --color-black-deep: #2A1810;
+
+            /* Typography */
+            --font-serif: 'Georgia', 'Garamond', serif;
+            --font-body: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ========== BASE STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-marble);
+            color: var(--color-black-soft);
+            line-height: 1.6;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== GRAIN OVERLAY ========== */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise' /%3E%3C/filter%3E%3Crect width='400' height='400' fill='black' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        /* ========== ATELIER LINE ========== */
+        .atelier-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-olive) 0%, var(--color-gold) 50%, var(--color-olive) 100%);
+            z-index: 1001;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        * {
+            font-family: var(--font-body);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        p, span, li, div {
+            font-family: var(--font-body);
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-black-soft);
+            font-family: var(--font-body);
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-olive);
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+            font-family: var(--font-body);
+        }
+
+        .body-text-lg {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-taupe);
+            font-weight: 400;
+            font-family: var(--font-body);
+        }
+
+        .text-gold {
+            color: var(--color-gold);
+        }
+
+        .text-caps {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--color-taupe);
+            font-weight: 600;
+        }
+
+        /* ========== COMPONENTS ========== */
+        .recipe-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--color-olive);
+            transition: all 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .recipe-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-olive);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-intention {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-black-soft);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .recipe-meta {
+            font-size: 0.9rem;
+            color: var(--color-taupe);
+            margin-bottom: 1rem;
+        }
+
+        .recipe-result {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-gold);
+            font-weight: 700;
+        }
+
+        .dose-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        .dose-item:last-child {
+            border-bottom: none;
+        }
+
+        .dose-label {
+            font-weight: 600;
+            color: var(--color-black-soft);
+        }
+
+        .dose-value {
+            color: var(--color-taupe);
+            font-style: italic;
+        }
+
+        .col-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-olive);
+            display: inline-block;
+        }
+
+        .chaos-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chaos-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .chaos-list li:before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #999;
+            font-weight: bold;
+        }
+
+        .moment-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .moment-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            background: var(--color-sand);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .moment-item.active {
+            background: var(--color-olive);
+            box-shadow: var(--shadow-md);
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .comparison-title {
+            font-size: 3rem;
+            line-height: 1.3;
+            color: var(--color-black-soft);
+            margin-bottom: 0;
+        }
+
+        /* ========== LAYOUTS ========== */
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            padding: var(--spacing-2xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .layout-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 0;
+        }
+
+        .split-content {
+            padding: var(--spacing-2xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-media {
+            width: 100%;
+            height: 100%;
+        }
+
+        .layout-manifesto {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .layout-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0;
+            padding: var(--spacing-2xl);
+        }
+
+        .layout-3col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .layout-dark {
+            background-color: var(--color-black-soft);
+            color: var(--color-ivory);
+        }
+
+        .layout-dark.layout-split {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* SPLIT-COMPARE: two-column split for comparison slide */
+        .layout-split-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: var(--spacing-lg);
+            align-items: start;
+            padding: var(--spacing-2xl);
+            height: 100%;
+        }
+
+        .layout-split-compare .others {
+            background: var(--color-marble);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            color: #666;
+            box-shadow: var(--shadow-sm);
+            overflow-y: auto;
+            max-height: calc(100vh - 160px);
+        }
+
+        .layout-split-compare .method {
+            background: linear-gradient(180deg, var(--color-ivory) 0%, var(--color-sand) 100%);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow-y: auto;
+            max-height: calc(100vh - 160px);
+        }
+
+        .layout-split-compare .method .recipe-card {
+            background: white;
+        }
+
+        .layout-split-compare .split-titles {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .layout-split-compare .split-titles .left-title {
+            text-align: left;
+        }
+
+        .layout-split-compare .split-titles .right-title {
+            text-align: right;
+        }
+
+        .layout-split-compare .method .panel-title {
+            font-size: 1.8rem;
+            color: var(--color-olive);
+            text-align: center;
+            margin: 0 0 0.5rem 0;
+            font-weight: 700;
+        }
+
+        /* ========== SLIDE DECK ========== */
+        .slide-deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            background: var(--color-marble);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        /* ========== CONTROLS ========== */
+        .nav-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--color-black-soft);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: var(--color-black-soft);
+            color: white;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 14rem;
+            z-index: 100;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--color-taupe);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .layout-split,
+            .layout-dark.layout-split {
+                grid-template-columns: 1fr;
+            }
+
+            .split-content {
+                padding: var(--spacing-lg);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .layout-split-compare {
+                grid-template-columns: 1fr;
+            }
+
+            .layout-split-compare .split-titles {
+                grid-template-columns: 1fr;
+            }
+
+            .layout-split-compare .split-titles .right-title {
+                text-align: left;
+            }
+
+            .grid-3col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="atelier-line"></div>
+    <div class="slide-deck">
+        <!-- SLIDE 1: WELCOME (Split Hero) -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-container layout-split">
+                <div class="split-content">
+                    <h2 class="hero-subtitle">Un ritual para volver a la textura</h2>
+                    <h1 class="hero-title">El Método<br><i
+                            style="font-family: var(--font-body); color: var(--color-olive); font-weight: 700;">Oribio</i></h1>
+                    <p class="body-text-lg" style="margin-top: 2rem;">
+                        Un ritual simple. Una compañía real. Un journey que se sostiene. No empieza con comprar, empieza con entender. <br><br>
+                        El Método Oribio es una invitación a reconectar con la textura natural de tu cabello, a través de productos funcionales y acompañamiento real.
+                    </p>
+                </div>
+                <div class="split-media">
+                    <div
+                        style="width: 100%; height: 100%; background: #E8DCC8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; overflow: hidden;">
+                        <img src="hero-texture.png" alt="Textura Oribio"
+                            style="width: 100%; height: 50%; object-fit: cover; border-radius: 10px 10px 0 0;">
+                        <img src="slide1-photo.jpg" alt="Persona usando Oribio" style="width: 100%; height: 50%; object-fit: cover; border-radius: 0 0 10px 10px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 2: MANIFESTO (Full Bleed) -->
+        <div class="slide" id="slide-2">
+            <div class="slide-container layout-manifesto">
+                <h2 class="hero-subtitle" style="color: var(--color-olive);">La Verdad Incómoda</h2>
+                <h1 style="font-size: 3.5rem; line-height: 1.2; max-width: 900px; margin: 0 auto 2rem;">
+                    Amar tu pelo no se logra de un día al otro.<br>
+                    <span style="font-style: italic; color: var(--color-taupe);">No es falta de disciplina. Es falta de método.</span>
+                </h1>
+                <p class="body-text-lg" style="margin: 0 auto;">
+                    El mercado te vende productos, pero no te enseña a usarlos. <br><br>
+                    El Método Oribio te acompaña para que logres resultados reales, sostenibles y sin frustración.
+                </p>
+            </div>
+        </div>
+        <!-- SLIDE 3: COMPARISON (Oribio vs Others) - Split Screen -->
+        <div class="slide" id="slide-3">
+            <div class="slide-container layout-split-compare">
+                <div class="split-titles">
+                    <div class="left-title">
+                        <h1 style="font-size:1.8rem; margin:0; color:var(--color-olive);">La diferencia no está en los tipos de cabellos ni en las necesidades.</h1>
+                    </div>
+                    <div class="right-title">
+                    </div>
+                </div>
+                <div class="others">
+                    <span class="col-header" style="color: #666; border-color: #ccc;">Otros</span>
+                    <h3 style="font-size:1.2rem; margin:0.5rem 0; color:#666; font-weight:700;">Producto suelto</h3>
+                    <ul class="chaos-list">
+                        <li><strong>Sin ritual:</strong> solo producto, sin guía ni acompañamiento.</li>
+                        <li><strong>Sin dosis:</strong> ensayo y error, resultados inconsistentes.</li>
+                        <li><strong>Sin método:</strong> acumulación de productos, frustración y abandono.</li>
+                    </ul>
+                    <div style="margin-top: 1.2rem;">
+                        <div style="position: relative; height: 160px; border: 1px dashed #999; display: flex; align-items: center; justify-content: center; background: transparent;">
+                            <span style="font-size: 3rem; color: #ccc;">?</span>
+                        </div>
+                        <p style="text-align: left; font-size: 0.95rem; margin-top: 1rem; color: #888;">El resultado: frustración, abandono y una relación distante con tu textura.</p>
+                    </div>
+                </div>
+                <div class="method">
+                    <h2 class="panel-title">El Método ORIBIO</h2>
+                    <p style="font-style: italic; color: var(--color-olive); font-size:1.03rem; margin-top:0;">Un método integral: productos funcionales, acompañamiento real y resultados sostenibles.</p>
+                    <hr style="border:none; height:1px; background: var(--color-taupe-border); margin:0.8rem 0 1rem 0; opacity:0.6;">
+                    <h3 style="font-size:1rem; color: var(--color-olive); margin:0 0 0.6rem 0; font-weight:700;">Receta por momentos</h3>
+                    <div style="display:grid; grid-template-columns: 1fr; gap:0.6rem;">
+                        <div class="recipe-card" style="padding: 0.9rem; border-left: 6px solid var(--color-olive);">
+                            <div class="recipe-label">NOCTURNO</div>
+                            <div class="recipe-intention" style="font-size: 0.95rem;">Restaurar mientras descansas</div>
+                            <p style="font-size: 0.85rem; color: var(--color-taupe); margin: 0.3rem 0;">Fricción de almohada rompe la fibra</p>
+                            <div class="dose-item"><span class="dose-label">Producto:</span> <span class="dose-value">Divine Miracle</span></div>
+                            <div class="dose-item"><span class="dose-label">Dosis:</span> <span class="dose-value">4-6 gotas</span></div>
+                        </div>
+                        <div class="recipe-card" style="padding: 0.9rem; border-left: 6px solid var(--color-olive);">
+                            <div class="recipe-label">LAVADO</div>
+                            <div class="recipe-intention" style="font-size: 0.95rem;">Limpiar y preparar</div>
+                            <p style="font-size: 0.85rem; color: var(--color-taupe); margin: 0.3rem 0;">Base limpia para el tratamiento</p>
+                        </div>
+                        <div class="recipe-card" style="padding: 0.9rem; border-left: 6px solid var(--color-olive);">
+                            <div class="recipe-label">POST-LAVADO</div>
+                            <div class="recipe-intention" style="font-size: 0.95rem;">Definir el patrón en húmedo</div>
+                            <p style="font-size: 0.85rem; color: var(--color-taupe); margin: 0.3rem 0;">Fibra moldeable, momento clave</p>
+                            <div class="dose-item"><span class="dose-label">Productos:</span> <span class="dose-value">Sublime + Lino Gel</span></div>
+                            <div class="dose-item"><span class="dose-label">Dosis:</span> <span class="dose-value">14-16 gotas + 2-3 pumps</span></div>
+                        </div>
+                        <div class="recipe-card" style="padding: 0.9rem; border-left: 6px solid var(--color-olive);">
+                            <div class="recipe-label">ENTRE-LAVADOS</div>
+                            <div class="recipe-intention" style="font-size: 0.95rem;">Fortalecer sin lavar</div>
+                            <p style="font-size: 0.85rem; color: var(--color-taupe); margin: 0.3rem 0;">Recuperar brillo y control</p>
+                            <div class="dose-item"><span class="dose-label">Producto:</span> <span class="dose-value">Maximum Elixir</span></div>
+                            <div class="dose-item"><span class="dose-label">Dosis:</span> <span class="dose-value">1-2 pumps</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 4: BUSINESS OPPORTUNITY (Dark Premium) -->
+        <div class="slide" id="slide-business">
+            <div class="slide-container layout-3col"
+                style="background-color: var(--color-black-soft); color: var(--color-ivory);">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h2 class="hero-subtitle" style="color: var(--color-gold);">Resultados Reales</h2>
+                    <h1 style="font-size: 3.5rem; color: white;">El Método genera <span style="color: var(--color-gold);">hábitos, comunidad y recompra.</span></h1>
+                </div>
+                <div class="grid-3col" style="align-items: flex-start; text-align: center;">
+                    <div style="padding: 2rem; border: 1px solid var(--color-taupe); border-radius: 8px;">
+                        <span style="font-family: var(--font-body); font-size: 5rem; color: var(--color-gold); line-height: 1; display: block; margin-bottom: 1rem; font-weight: 700;">12%</span>
+                        <h3 style="font-size: 1.2rem; margin: 0; font-weight: 700; color: white;">Tasa de Recompra</h3>
+                        <p style="color: var(--color-sand); font-size: 0.9rem; margin-top: 0.5rem;">El hábito y el acompañamiento generan fidelidad.</p>
+                    </div>
+                    <div style="padding: 2rem; border: 1px solid var(--color-taupe); border-radius: 8px;">
+                        <span style="font-family: var(--font-body); font-size: 5rem; color: var(--color-gold); line-height: 1; display: block; margin-bottom: 1rem; font-weight: 700;">+120</span>
+                        <h3 style="font-size: 1.2rem; margin: 0; font-weight: 700; color: white;">Reseñas Verificadas</h3>
+                        <p style="color: var(--color-sand); font-size: 0.9rem; margin-top: 0.5rem;">Validación social real y transparente.</p>
+                    </div>
+                    <div style="padding: 2rem; border: 1px solid var(--color-taupe); border-radius: 8px;">
+                        <span style="font-family: var(--font-body); font-size: 5rem; color: var(--color-gold); line-height: 1; display: block; margin-bottom: 1rem; font-weight: 700;">5%</span>
+                        <h3 style="font-size: 1.2rem; margin: 0; font-weight: 700; color: white;">Engagement Rate</h3>
+                        <p style="color: var(--color-sand); font-size: 0.9rem; margin-top: 0.5rem;">Comunidad activa, leal y participativa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 6: 3 MOMENTOS (3 Column) -->
+        <div class="slide" id="slide-6">
+            <div class="slide-container layout-3col">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h2 class="hero-subtitle">El Sistema</h2>
+                    <h1 style="font-size: 3rem;">Los 3 Momentos<br><span style="font-style: italic; color: var(--color-taupe);">Una ruta flexible, no reglas rígidas.</span></h1>
+                </div>
+                <div class="grid-3col">
+                    <div class="recipe-card" style="height: 100%;">
+                        <div class="recipe-label">MOMENTO 01</div>
+                        <div class="recipe-intention">Nocturno</div>
+                        <p class="recipe-meta" style="line-height:1.6;">Reparar y proteger mientras descansas. Menos frizz, más definición al despertar.</p>
+                        <div class="recipe-result" style="margin-top: auto;">Reparación</div>
+                    </div>
+                    <div class="recipe-card" style="height: 100%;">
+                        <div class="recipe-label">MOMENTO 02</div>
+                        <div class="recipe-intention">Post-Lavado</div>
+                        <p class="recipe-meta" style="line-height:1.6;">Definir el patrón en húmedo. El momento clave para moldear la forma.</p>
+                        <div class="recipe-result" style="margin-top: auto;">Definición</div>
+                    </div>
+                    <div class="recipe-card" style="height: 100%;">
+                        <div class="recipe-label">MOMENTO 03</div>
+                        <div class="recipe-intention">Entre-Lavados</div>
+                        <p class="recipe-meta" style="line-height:1.6;">Recuperar brillo y control en los días intermedios. Fortalecer sin lavar.</p>
+                        <div class="recipe-result" style="margin-top: auto;">Mantención</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 7: NOCTURNO -->
+        <div class="slide" id="slide-7">
+            <div class="slide-container layout-split">
+                <div class="split-media">
+                    <div
+                        style="width: 100%; height: 100%; background: #2F2F2F; display: flex; align-items: center; justify-content: center; color: white;">
+                        <span class="text-caps">[IMG: Divine Miracle en mesa de noche]</span>
+                    </div>
+                </div>
+                <div class="split-content" style="background: var(--color-ivory);">
+                    <div class="moment-selector">
+                        <div class="moment-item active">NOCTURNO</div>
+                        <div class="moment-item">POST-LAVADO</div>
+                        <div class="moment-item">ENTRE-LAVADOS</div>
+                    </div>
+                    <h2 class="hero-subtitle">Producto: Divine Miracle</h2>
+                    <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Reparar y Proteger<br><span style="font-style: italic;">mientras duermes.</span></h1>
+                    <p style="margin-bottom: 2rem; color: var(--color-taupe);">
+                        La noche es el momento de mayor reparación. <br><br>
+                        Divine Miracle actúa mientras duermes, restaurando la fibra y protegiendo la forma natural de tu textura.
+                    </p>
+                    <div class="recipe-card"
+                        style="width: 100%; max-width: 100%; box-shadow: none; border: 1px solid var(--color-taupe-border); background: white;">
+                        <div class="dose-item">
+                            <span class="dose-label">Dosis</span>
+                            <span class="dose-value">4–6 Gotas (Todos los días)</span>
+                        </div>
+                        <div class="dose-item">
+                            <span class="dose-label">Zona</span>
+                            <span class="dose-value">Medios → Puntas</span>
+                        </div>
+                        <div class="dose-item">
+                            <span class="dose-label">Gesto</span>
+                            <span class="dose-value">Calienta en manos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 8: POST-LAVADO -->
+        <div class="slide" id="slide-8">
+            <div class="slide-container layout-split">
+                <div class="split-media">
+                    <div
+                        style="width: 100%; height: 100%; background: #E6E0D5; display: flex; align-items: center; justify-content: center; color: #555;">
+                        <span class="text-caps">[IMG: Cabello Húmedo Definido]</span>
+                    </div>
+                </div>
+                <div class="split-content" style="background: var(--color-ivory);">
+                    <div class="moment-selector">
+                        <div class="moment-item">NOCTURNO</div>
+                        <div class="moment-item active">POST-LAVADO</div>
+                        <div class="moment-item">ENTRE-LAVADOS</div>
+                    </div>
+                    <h2 class="hero-subtitle">Productos: Sublime + Lino Gel</h2>
+                    <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Definir el Patrón<br><span style="font-style: italic;">en húmedo.</span></h1>
+                    <p style="margin-bottom: 2rem; color: var(--color-taupe);">
+                        La fibra está moldeable y receptiva. <br><br>
+                        Sublime desenreda y nutre, Lino Gel define y sella la forma. El resultado: patrón definido y textura protegida.
+                    </p>
+                    <div class="recipe-card"
+                        style="width: 100%; max-width: 100%; box-shadow: none; border: 1px solid var(--color-taupe-border); background: white;">
+                        <div class="dose-item">
+                            <span class="dose-label">Paso 1: Sublime Renovation</span>
+                            <span class="dose-value">14-16 Gotas (Desenredar)</span>
+                        </div>
+                        <div class="dose-item">
+                            <span class="dose-label">Paso 2: Lino Active Gel</span>
+                            <span class="dose-value">2-3 Pumps (Definir)</span>
+                        </div>
+                        <div class="dose-item">
+                            <span class="dose-label">Gesto</span>
+                            <span class="dose-value">Scrunch (Ondas) / Recto (Liso)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 9: ENTRE-LAVADOS -->
+        <div class="slide" id="slide-9">
+            <div class="slide-container layout-split">
+                <div class="split-media">
+                    <div
+                        style="width: 100%; height: 100%; background: #DAB255; display: flex; align-items: center; justify-content: center; color: white;">
+                        <span class="text-caps">[IMG: Manos aplicando en seco]</span>
+                    </div>
+                </div>
+                <div class="split-content" style="background: var(--color-ivory);">
+                    <div class="moment-selector">
+                        <div class="moment-item">NOCTURNO</div>
+                        <div class="moment-item">POST-LAVADO</div>
+                        <div class="moment-item active">ENTRE-LAVADOS</div>
+                    </div>
+                    <h2 class="hero-subtitle">Producto: Maximum Elixir</h2>
+                    <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Fortalecer y Proteger<br><span style="font-style: italic;">sin lavar.</span></h1>
+                    <p style="margin-bottom: 2rem; color: var(--color-taupe);">
+                        El clima y el roce apagan la forma. <br><br>
+                        Maximum Elixir fortalece y protege entre lavados, recuperando brillo y control sin necesidad de lavar.
+                    </p>
+                    <div class="recipe-card"
+                        style="width: 100%; max-width: 100%; box-shadow: none; border: 1px solid var(--color-taupe-border); background: white;">
+                        <div class="dose-item">
+                            <span class="dose-label">Dosis</span>
+                            <span class="dose-value">1-2 Pumps</span>
+                        </div>
+                        <div class="dose-item">
+                            <span class="dose-label">Zona</span>
+                            <span class="dose-value">Puntas y áreas con frizz</span>
+                        </div>
+                        <div class="dose-item">
+                            <span class="dose-label">Gesto</span>
+                            <span class="dose-value">Scrunch suave o alisado manual</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDE 12: DARK PREMIUM -->
+        <div class="slide" id="slide-12">
+            <div class="slide-container layout-dark layout-split">
+                <div class="split-content">
+                    <h2 class="hero-subtitle text-gold">Voces del Método</h2>
+                    <h1 class="hero-title" style="color: var(--color-ivory);">Resultados<br><span
+                            style="font-style: italic;">Humanos.</span></h1>
+                    <figure style="margin-top: 3rem;">
+                        <blockquote
+                            style="font-family: var(--font-body); font-size: 2rem; border-left: 2px solid var(--color-olive); padding-left: 2rem; color: var(--color-sand); font-weight: 400;">
+                            "Volver a ver tu textura con orgullo. Menos pelea frente al espejo; más confianza en tu
+                            rutina."
+                        </blockquote>
+                    </figure>
+                </div>
+                <div class="split-media">
+                    <div
+                        style="width: 100%; height: 100%; background: #111; display: flex; align-items: center; justify-content: center; color: #444;">
+                        <span class="text-caps">[IMG: Retrato en Clave Baja]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-counter"><span id="curr-slide">1</span> / 9</div>
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()">Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente</button>
+    </div>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    console.log('✓ Service Worker registrado');
+                }).catch(err => {
+                    console.log('Service Worker error:', err);
+                });
+            });
+        }
+    </script>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('curr-slide');
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            counter.innerText = index + 1;
+        }
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function switchTab(e, tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            e.target.classList.add('active');
+        }
+
+        // Keyboard nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Touch swipe nav
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextSlide();
+            }
+            if (touchEndX - touchStartX > swipeThreshold) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>
